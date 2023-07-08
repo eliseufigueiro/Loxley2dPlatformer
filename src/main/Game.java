@@ -8,7 +8,8 @@ public class Game {
     public Game() {
 
         System.out.println("Hello Loxley!");
-        gameWindow = new GameWindow();
+
         gamePanel = new GamePanel();
+        gameWindow = new GameWindow(gamePanel);
     }
 }

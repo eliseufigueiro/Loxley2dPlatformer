@@ -9,8 +9,10 @@ public class GamePanel extends JPanel {
 
     }
 
-    public void paintComponet(Graphics g) {
+    public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
+
+        g.fillRect(100, 100, 400, 50);
     }
 }

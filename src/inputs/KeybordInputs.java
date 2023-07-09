@@ -1,10 +1,18 @@
 package inputs;
 
+import main.GamePanel;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeybordInputs implements KeyListener {
 
+    private GamePanel gamePanel;
+
+    public KeybordInputs(GamePanel gamePanel) {
+
+        this.gamePanel = gamePanel;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -15,10 +23,10 @@ public class KeybordInputs implements KeyListener {
     public void keyPressed(KeyEvent e) {
 
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_W -> System.out.println("Key W!");
-            case KeyEvent.VK_A -> System.out.println("Key A!");
-            case KeyEvent.VK_S -> System.out.println("Key S!");
-            case KeyEvent.VK_D -> System.out.println("Key D!");
+            case KeyEvent.VK_W -> gamePanel.changeY(-5);
+            case KeyEvent.VK_A -> gamePanel.changeX(-5);
+            case KeyEvent.VK_S -> gamePanel.changeY(5);
+            case KeyEvent.VK_D -> gamePanel.changeX(5);
         }
     }
 

@@ -12,12 +12,12 @@ public class GamePanel extends JPanel {
 
     private MouseInputs mouseInputs;
 
-    private int x = 0, y = 0;
+    private int x = 100, y = 100;
 
     public GamePanel() {
 
         keybordInputs = new KeybordInputs(this); //Aqui passamos o proprio painel
-        mouseInputs = new MouseInputs();
+        mouseInputs = new MouseInputs(this); //Aqui passamos o proprio painel
 
         addKeyListener(keybordInputs);
         addMouseListener(mouseInputs);
@@ -36,10 +36,17 @@ public class GamePanel extends JPanel {
         repaint();
     }
 
+    public void SetRectPos(int x, int y) {
+
+        this.x = x;
+        this.y = y;
+        repaint();
+    }
+
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
 
-        g.fillRect(100 + x, 100 + y, 50, 50);
+        g.fillRect(x, y, 50, 50);
     }
 }

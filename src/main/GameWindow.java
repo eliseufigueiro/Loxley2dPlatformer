@@ -2,18 +2,17 @@ package main;
 
 import javax.swing.*;
 
-public class GameWindow {
-
-    private JFrame jFrame;
+public class GameWindow extends JFrame{
 
     public GameWindow(GamePanel gamePanel) {
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setTitle("Hello Loxley! 2D Adventure.");
+        // Add game components here
+        this.add(gamePanel);
 
-        jFrame = new JFrame();
-
-        jFrame.setSize(800, 600);
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.add(gamePanel);
-        jFrame.setLocationRelativeTo(null);
-        jFrame.setVisible(true);
+        this.pack();
+        this.setVisible(true);
     }
 }

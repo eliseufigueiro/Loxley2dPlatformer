@@ -10,7 +10,6 @@ public class KeybordInputs implements KeyListener {
     private GamePanel gamePanel;
 
     public KeybordInputs(GamePanel gamePanel) {
-
         this.gamePanel = gamePanel;
     }
 
@@ -21,12 +20,12 @@ public class KeybordInputs implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_W -> gamePanel.changeY(-5);
-            case KeyEvent.VK_A -> gamePanel.changeX(-5);
-            case KeyEvent.VK_S -> gamePanel.changeY(5);
-            case KeyEvent.VK_D -> gamePanel.changeX(5);
+            //case KeyEvent.VK_W -> gamePanel.changePlayerY(-5);
+            case KeyEvent.VK_W -> gamePanel.changePlayerY(-5);
+            case KeyEvent.VK_A -> gamePanel.changePlayerX(-5);
+            case KeyEvent.VK_S -> gamePanel.changePlayerY(5);
+            case KeyEvent.VK_D -> gamePanel.changePlayerX(5);
         }
     }
 

@@ -1,19 +1,30 @@
 package main;
 
+import entities.Player;
+
+import java.awt.*;
+
 public class Game implements Runnable {
 
     private GameWindow gameWindow;
     private GamePanel gamePanel;
     private Thread gameThread;
-    private final int FPS = 60;
+
+    private Player player;
 
     public Game() {
         System.out.println("Hello Loxley! 2D Adventure.");
+        initClasses();
 
-        gamePanel = new GamePanel();
+        gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
+
         startGameLoop();
+    }
+
+    private void initClasses() {
+        player = new Player(0, 0, 5.0f);
     }
 
     private void startGameLoop() {
@@ -21,31 +32,23 @@ public class Game implements Runnable {
         gameThread.start();
     }
 
-    @Override
-//    public void run() {
-//        double timePerFrame = 1000000000.0 / FPS;
-//        long lastFrame = System.nanoTime();
-//        long now;
-//
-//        int frames = 0;
-//        long lastCheck = System.currentTimeMillis();
-//
-//        while (gameThread != null) {
-//            now = System.nanoTime();
-//            if (now - lastFrame >= timePerFrame) {
-//                gamePanel.repaint();
-//                lastFrame = now;
-//                frames++;
-//            }
-//
-//            if (System.currentTimeMillis() - lastCheck >= 1000) {
-//                lastCheck = System.currentTimeMillis();
-//                System.out.println("FPS: " + frames);
-//                frames = 0;
-//            }
-//        }
-//    }
+    public void updateGameLogic(double delta) {
+        // Atualizar a lógica do jogo com base no delta de tempo
+        player.update();
 
+        // Verificar colisões ou outras lógicas do jogo
+        //checkCollisions();
+        //handleInput();
+        // ...
+    }
+
+    public void renderGame(Graphics g) {
+        // Renderizar o jogo
+        player.render(g);
+    }
+
+
+    @Override
     public void run() {
         final int TARGET_FPS = 60;
         final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
@@ -64,7 +67,7 @@ public class Game implements Runnable {
             updateGameLogic(delta);
 
             // Renderizar o jogo
-            renderGame();
+            gamePanel.repaint();
 
             // Calcular o FPS
             lastFpsTime += updateLength;
@@ -88,14 +91,16 @@ public class Game implements Runnable {
         }
     }
 
-    private void updateGameLogic(double delta) {
-        // Atualizar a lógica do jogo com base no delta de tempo
-        // ...
+    public void windowFocusLost() {
+        player.resetDirectBooleans();
     }
 
-    private void renderGame() {
-        // Renderizar o jogo
-        gamePanel.repaint();
+    // GETTER AND SETTER
+    public Player getPlayer() {
+        return player;
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 }
